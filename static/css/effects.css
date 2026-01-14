@@ -1,0 +1,428 @@
+/* ===================================
+   WEATHER EVENT VISUAL EFFECTS
+   =================================== */
+
+/* Weather effects overlay container */
+#weather-effects {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+/* Screen shake animation */
+@keyframes screenShake {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-10px, -5px); }
+    20% { transform: translate(10px, 5px); }
+    30% { transform: translate(-10px, 5px); }
+    40% { transform: translate(10px, -5px); }
+    50% { transform: translate(-10px, -5px); }
+    60% { transform: translate(10px, 5px); }
+    70% { transform: translate(-10px, 5px); }
+    80% { transform: translate(10px, -5px); }
+    90% { transform: translate(-10px, -5px); }
+}
+
+.screen-shake {
+    animation: screenShake 0.5s ease-in-out;
+}
+
+/* Lightning Strike Effect */
+@keyframes lightningBolt {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    20% { opacity: 0; }
+    30% { opacity: 1; }
+    40% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.lightning-effect {
+    position: absolute;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+        transparent 0%,
+        #fff 20%,
+        #4af 40%,
+        #fff 50%,
+        #4af 60%,
+        #fff 80%,
+        transparent 100%
+    );
+    box-shadow: 0 0 20px #4af, 0 0 40px #4af;
+    animation: lightningBolt 0.4s ease-in-out;
+    filter: blur(1px);
+}
+
+/* Fire/Solar Effect */
+@keyframes fireBlast {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
+    100% { transform: scale(2.5) rotate(360deg); opacity: 0; }
+}
+
+.fire-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, 
+        #ff0 0%,
+        #ff6600 30%,
+        #ff0000 60%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    animation: fireBlast 1s ease-out;
+    filter: blur(10px);
+}
+
+/* Ice/Frost Effect */
+@keyframes iceShard {
+    0% { 
+        transform: translateY(-100%) rotate(0deg) scale(0);
+        opacity: 0;
+    }
+    50% { 
+        opacity: 1;
+    }
+    100% { 
+        transform: translateY(100vh) rotate(720deg) scale(1);
+        opacity: 0;
+    }
+}
+
+.ice-shard {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 40px solid #4af;
+    filter: drop-shadow(0 0 10px #4af);
+    animation: iceShard 1.5s ease-in;
+}
+
+/* Wind/Gust Effect */
+@keyframes windGust {
+    0% { 
+        left: -100%;
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% { 
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+.wind-effect {
+    position: absolute;
+    width: 200%;
+    height: 4px;
+    background: linear-gradient(to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        transparent 100%
+    );
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    animation: windGust 0.8s ease-in-out;
+    filter: blur(2px);
+}
+
+/* Healing Effect */
+@keyframes healPulse {
+    0% { 
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% { 
+        transform: scale(1.5);
+        opacity: 1;
+    }
+    100% { 
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+.heal-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    margin: -150px 0 0 -150px;
+    background: radial-gradient(circle,
+        #0f0 0%,
+        #0f08 50%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    animation: healPulse 1s ease-out;
+}
+
+/* Thunder/Storm Effect */
+@keyframes thunderFlash {
+    0%, 100% { background: transparent; }
+    10%, 30%, 50% { background: rgba(255, 255, 255, 0.9); }
+    20%, 40%, 60% { background: transparent; }
+}
+
+.thunder-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: thunderFlash 0.6s ease-in-out;
+}
+
+/* Darkness/Eclipse Effect */
+@keyframes darkPulse {
+    0% { 
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% { 
+        transform: scale(1.5);
+        opacity: 0.9;
+    }
+    100% { 
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+.dark-effect {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    margin: -250px 0 0 -250px;
+    background: radial-gradient(circle,
+        transparent 0%,
+        #000 40%,
+        transparent 100%
+    );
+    animation: darkPulse 1.2s ease-out;
+}
+
+/* Crystal Effect */
+@keyframes crystalShatter {
+    0% { 
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% { 
+        transform: scale(1) rotate(180deg);
+        opacity: 1;
+    }
+    100% { 
+        transform: scale(2) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.crystal-effect {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, 
+        #f0f 0%,
+        #0ff 50%,
+        #ff0 100%
+    );
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    animation: crystalShatter 1s ease-out;
+    filter: drop-shadow(0 0 20px #f0f);
+}
+
+/* Floating Damage Numbers */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+    }
+    20% {
+        transform: translateY(-20px) scale(1.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-150px) scale(1);
+        opacity: 0;
+    }
+}
+
+.damage-number {
+    position: absolute;
+    font-size: 48px;
+    font-weight: bold;
+    color: #ff0000;
+    text-shadow: 
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000,
+        0 0 20px #ff0000;
+    animation: floatUp 1.5s ease-out;
+    z-index: 10000;
+    pointer-events: none;
+}
+
+.heal-number {
+    color: #00ff00;
+    text-shadow: 
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000,
+        0 0 20px #00ff00;
+}
+
+.crit-number {
+    font-size: 72px;
+    color: #ffaa00;
+    text-shadow: 
+        -3px -3px 0 #000,
+        3px -3px 0 #000,
+        -3px 3px 0 #000,
+        3px 3px 0 #000,
+        0 0 30px #ffaa00;
+}
+
+/* Particle System */
+.particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+@keyframes particleFade {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+.particle {
+    animation: particleFade 1s ease-out forwards;
+}
+
+/* Screen Flash Effects */
+@keyframes redFlash {
+    0%, 100% { background: transparent; }
+    50% { background: rgba(255, 0, 0, 0.3); }
+}
+
+@keyframes greenFlash {
+    0%, 100% { background: transparent; }
+    50% { background: rgba(0, 255, 0, 0.3); }
+}
+
+@keyframes blueFlash {
+    0%, 100% { background: transparent; }
+    50% { background: rgba(0, 150, 255, 0.3); }
+}
+
+.screen-flash-red {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: redFlash 0.3s ease-in-out;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+.screen-flash-green {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: greenFlash 0.3s ease-in-out;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+.screen-flash-blue {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: blueFlash 0.3s ease-in-out;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* Pulsing effect for weather display when events can occur */
+@keyframes weatherPulse {
+    0%, 100% { 
+        border-color: #4a90e2;
+        box-shadow: 0 0 5px #4a90e2;
+    }
+    50% { 
+        border-color: #ffd700;
+        box-shadow: 0 0 20px #ffd700;
+    }
+}
+
+.weather-info {
+    background: linear-gradient(135deg, #1a2a4e 0%, #2d3561 100%);
+    border: 2px solid #4a90e2;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 12px;
+    animation: weatherPulse 2s ease-in-out infinite;
+}
+
+/* Combat panel pulse when taking damage */
+@keyframes damagePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.damage-pulse {
+    animation: damagePulse 0.3s ease-in-out;
+}
+
+/* HP bar drain animation */
+.hp-bar-fill, .enemy-hp-bar-fill {
+    transition: width 0.5s ease-out, background-color 0.3s ease;
+}
+
+/* Critical hit screen effect */
+@keyframes criticalHit {
+    0% { transform: scale(1); filter: brightness(1) saturate(1); }
+    25% { transform: scale(1.02); filter: brightness(1.5) saturate(2); }
+    50% { transform: scale(0.98); filter: brightness(1.2) saturate(1.5); }
+    75% { transform: scale(1.01); filter: brightness(1.3) saturate(1.8); }
+    100% { transform: scale(1); filter: brightness(1) saturate(1); }
+}
+
+.critical-hit-effect {
+    animation: criticalHit 0.4s ease-in-out;
+}
+

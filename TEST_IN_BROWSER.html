@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Combat Bug Test</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1a1a2e;
+            color: #eee;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .success { color: #2ecc71; }
+        .error { color: #e74c3c; }
+        #log {
+            background: #000;
+            padding: 15px;
+            margin-top: 20px;
+            border: 2px solid #4a90e2;
+            min-height: 300px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Combat Bug Test</h1>
+    <p>Testing if combat state persists between requests...</p>
+    
+    <button onclick="startGame()">1. Start Game</button>
+    <button onclick="forceCombat()">2. Force Combat</button>
+    <button onclick="attack()">3. Attack</button>
+    <button onclick="defend()">4. Defend</button>
+    <button onclick="clearLog()">Clear Log</button>
+    
+    <div id="log"></div>
+    
+    <script>
+        function log(msg, isError = false) {
+            const logEl = document.getElementById('log');
+            const className = isError ? 'error' : 'success';
+            logEl.innerHTML += `<span class="${className}">${msg}</span>\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+        
+        function clearLog() {
+            document.getElementById('log').innerHTML = '';
+        }
+        
+        async function startGame() {
+            log('Starting game...');
+            try {
+                const response = await fetch('http://localhost:8000/api/start_game', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({name: 'Tester', class: 'Warrior'})
+                });
+                const data = await response.json();
+                if (data.success) {
+                    log('✅ Game started successfully!');
+                } else {
+                    log('❌ Failed to start game', true);
+                }
+            } catch (e) {
+                log(`❌ Error: ${e.message}`, true);
+            }
+        }
+        
+        async function forceCombat() {
+            log('Forcing combat...');
+            try {
+                const response = await fetch('http://localhost:8000/api/test_combat', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                const data = await response.json();
+                if (data.success) {
+                    log('✅ Combat started! Enemy ready!');
+                } else {
+                    log(`❌ Failed: ${data.error}`, true);
+                }
+            } catch (e) {
+                log(`❌ Error: ${e.message}`, true);
+            }
+        }
+        
+        async function attack() {
+            log('Attempting ATTACK...');
+            try {
+                const response = await fetch('http://localhost:8000/api/combat_action', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({action: 'attack'})
+                });
+                const data = await response.json();
+                if (data.success) {
+                    log('✅✅✅ ATTACK WORKED! BUG IS FIXED! ✅✅✅');
+                    log('Messages: ' + JSON.stringify(data.game_state.messages));
+                } else {
+                    log(`❌ Attack failed: ${data.error}`, true);
+                }
+            } catch (e) {
+                log(`❌ Error: ${e.message}`, true);
+            }
+        }
+        
+        async function defend() {
+            log('Attempting DEFEND...');
+            try {
+                const response = await fetch('http://localhost:8000/api/combat_action', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({action: 'defend'})
+                });
+                const data = await response.json();
+                if (data.success) {
+                    log('✅ DEFEND WORKED!');
+                } else {
+                    log(`❌ Defend failed: ${data.error}`, true);
+                }
+            } catch (e) {
+                log(`❌ Error: ${e.message}`, true);
+            }
+        }
+        
+        log('Ready to test! Click buttons in order: 1, 2, 3, 4');
+        log('---');
+    </script>
+</body>
+</html>
+
+

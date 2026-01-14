@@ -1,0 +1,102 @@
+========================================
+  HOW TO RUN THE WEB VERSION
+========================================
+
+EASIEST METHOD:
+--------------
+Open Terminal in this folder and run:
+
+    ./start_web.sh
+
+This will:
+✓ Set up everything automatically
+✓ Install Flask if needed
+✓ Start the web server
+
+Then open your browser to: http://localhost:8080
+
+
+ALTERNATIVE METHOD:
+------------------
+If the script doesn't work, run these commands:
+
+1. Activate virtual environment:
+   source venv/bin/activate
+
+2. Start the server:
+   python web_game.py
+   
+   OR on port 8000:
+   python web_game.py 8000
+
+3. Open browser to:
+   http://localhost:8080
+   
+   OR if using port 8000:
+   http://localhost:8000
+
+
+WHAT YOU'LL SEE:
+---------------
+When you run the server, you'll see:
+
+  ⚔️  REALM OF LEGENDS  ⚔️
+  
+  🌐 Access the game from:
+     Local:    http://localhost:8080
+     Network:  http://192.168.x.x:8080
+  
+  ✨ The game will run in your web browser!
+  ✨ Share the Network URL with others on your WiFi!
+
+Then just open your browser and start playing!
+
+
+TROUBLESHOOTING:
+---------------
+❌ "Permission denied" when running ./start_web.sh
+   → Run: chmod +x start_web.sh
+
+❌ Port 8080 already in use
+   → Run on port 8000: python web_game.py 8000
+   → Or use the script: ./start_web_8000.sh
+   → Or edit web_game.py and change PORT = 8080 to another port
+   
+❌ Port 5000 was in use
+   ✅ Fixed! Now using port 8080 (avoids AirPlay conflict)
+
+❌ Flask not installed error
+   → Run: source venv/bin/activate && pip install Flask
+
+❌ Can't connect from browser
+   → Make sure the server is running (check terminal)
+   → Try http://127.0.0.1:8080 instead
+   
+❌ Can't access from other devices
+   → Check your firewall settings
+   → Make sure you're using the Network URL, not localhost
+   → Both devices must be on the same WiFi network
+
+
+WANT TO HOST ONLINE?
+-------------------
+See QUICK_DEPLOY.md for easy cloud hosting options:
+- PythonAnywhere (free, always on)
+- Replit (easiest setup)
+- Ngrok (temporary links)
+- And more!
+
+
+FEATURES:
+--------
+✨ Beautiful gradient UI
+⚔️ Interactive combat
+🎒 Visual inventory
+📜 Quest tracking
+🏪 Shop interface
+🗺️ Location explorer
+💾 Auto-save (session-based)
+
+
+Enjoy your adventure! ⚔️
+

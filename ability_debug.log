@@ -1,0 +1,47 @@
+
+============================================================
+               ⚔️  REALM OF LEGENDS  ⚔️
+============================================================
+
+🌐 Starting web server...
+
+📍 Access the game from:
+   Local:    http://localhost:8000
+
+✨ The game will run in your web browser!
+
+Press Ctrl+C to stop the server
+
+============================================================
+
+ * Serving Flask app 'web_game'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.20.83.4:8000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [19/Nov/2025 13:30:11] "POST /api/start_game HTTP/1.1" 200 -
+127.0.0.1 - - [19/Nov/2025 13:30:11] "POST /api/test_combat HTTP/1.1" 200 -
+[2025-11-19 13:30:11,229] ERROR in app: Exception on /api/combat_action [POST]
+Traceback (most recent call last):
+  File "/Users/admin/miniconda3/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/admin/miniconda3/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/admin/miniconda3/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/admin/miniconda3/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/admin/RPG game/web_game.py", line 413, in combat_action
+    message, success = Combat.player_turn(game.player, game.current_enemy, "ability", ability)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/admin/RPG game/combat.py", line 58, in player_turn
+    success, message, *damage_list = player.use_ability(ability_name, enemy)
+                                     ^^^^^^^^^^^^^^^^^^
+AttributeError: 'Character' object has no attribute 'use_ability'
+127.0.0.1 - - [19/Nov/2025 13:30:11] "[35m[1mPOST /api/combat_action HTTP/1.1[0m" 500 -

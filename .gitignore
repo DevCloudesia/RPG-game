@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Game save files
+savegame.pkl
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Flask
+instance/
+*.pyc
+
+# Deployment
+.vercel
+.render
+
+# Instance logs and PIDs
+instance*.log
+instance*.pid
+

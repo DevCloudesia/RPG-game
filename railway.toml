@@ -1,0 +1,12 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "python web_game.py"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+
+
+
+

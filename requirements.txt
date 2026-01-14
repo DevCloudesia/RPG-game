@@ -1,0 +1,10 @@
+# Realm of Legends - RPG Game
+
+# For terminal version (main.py):
+# No external dependencies required!
+# Python 3.6+ is sufficient to run the terminal game
+
+# For web version (web_game.py):
+Flask==3.0.0
+gunicorn==21.2.0
+
